@@ -107,9 +107,11 @@ for f in xetex xelatex; do
 done
 
 %preun
-for f in xetex xelatex; do
-	[ ! -x %{_bindir}/fmtutil-sys ] || fmtutil-sys --disablefmt $f
-done
+if [ "$1" = 0 ]; then
+	for f in xetex xelatex; do
+		[ ! -x %{_bindir}/fmtutil-sys ] || fmtutil-sys --disablefmt $f
+	done
+fi
 
 %postun
 [ ! -x %{_bindir}/texhash ] || %{_bindir}/texhash
