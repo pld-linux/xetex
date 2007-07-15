@@ -7,6 +7,7 @@ License:	X11 license
 Group:		Applications/Publishing/TeX
 Source0:	http://scripts.sil.org/svn-view/xetex/TAGS/%{name}-%{version}.tar.gz
 # Source0-md5:	2f1f09337e22e0fb42d9caed225d6052
+Patch0:		%{name}-discretionary.patch
 URL:		http://scripts.sil.org/xetex
 BuildRequires:	bison
 BuildRequires:	flex
@@ -37,6 +38,7 @@ i TrueType.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 sh ./build-xetex
