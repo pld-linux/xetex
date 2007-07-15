@@ -81,6 +81,7 @@ russian		ruhyphen.tex
 slovene		sihyph23.tex
 turkish		trhyph.tex
 % ukrainian	ukrhyph.tex
+nohyphenation	zerohyph.tex
 EOF
 PATH=$RPM_BUILD_ROOT%{_bindir}:$PATH \
 TEXMFHOME=$RPM_BUILD_ROOT%{texmf} \
