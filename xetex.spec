@@ -2,7 +2,7 @@ Summary:	An extension of TeX (and LaTeX/ConTeXt) with Unicode and OpenType suppo
 Summary(pl.UTF-8):	Rozszerzenie TeXa (i LaTeXa/ConTeXtu) wspierające Unicode i OpenType
 Name:		xetex
 Version:	0.996
-Release:	1
+Release:	2
 License:	X11 license
 Group:		Applications/Publishing/TeX
 Source0:	http://scripts.sil.org/svn-view/xetex/TAGS/%{name}-%{version}.tar.gz
@@ -12,7 +12,7 @@ URL:		http://scripts.sil.org/xetex
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1:2.3
-BuildRequires:	tetex >= 1:3.0-5
+BuildRequires:	tetex >= 1:3.0-6
 Requires(post,preun,postun):	tetex
 Requires:	fontconfig
 %requires_eq	tetex
