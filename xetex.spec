@@ -2,17 +2,21 @@ Summary:	An extension of TeX (and LaTeX/ConTeXt) with Unicode and OpenType suppo
 Summary(pl.UTF-8):	Rozszerzenie TeXa (i LaTeXa/ConTeXtu) wspierające Unicode i OpenType
 Name:		xetex
 Version:	0.996
-Release:	2
+Release:	3
 License:	X11 license
 Group:		Applications/Publishing/TeX
 Source0:	http://scripts.sil.org/svn-view/xetex/TAGS/%{name}-%{version}.tar.gz
 # Source0-md5:	2f1f09337e22e0fb42d9caed225d6052
+# http://scripts.sil.org/cms/scripts/render_download.php?site_id=nrsi&format=file&media_id=xetex_doc_094&filename=XeTeX_doc.zip
+Source1:	XeTeX_doc.zip
+# Source1-md5:	46946f4092eaced3a634c20522b58b8e
 Patch0:		%{name}-discretionary.patch
 URL:		http://scripts.sil.org/xetex
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1:2.3
-BuildRequires:	tetex >= 1:3.0-6
+BuildRequires:	tetex >= 1:3.0-7
+BuildRequires:	unzip
 Requires(post,preun,postun):	tetex
 Requires:	fontconfig
 %requires_eq	tetex
@@ -37,7 +41,7 @@ azjatyckie wymagające specjalnego traktowania, i o fonty OpenType
 i TrueType.
 
 %prep
-%setup -q
+%setup -q -a1
 %patch0 -p1
 
 %build
@@ -52,13 +56,14 @@ ln -s xetex $RPM_BUILD_ROOT%{_bindir}/xelatex
 
 install -d $RPM_BUILD_ROOT%{_datadir}
 cp -a texmf $RPM_BUILD_ROOT%{_datadir}
-
-# tetex has a newer version of xkeyval
-rm -rf $RPM_BUILD_ROOT%{texmf}/doc/latex/xkeyval
-rm -rf $RPM_BUILD_ROOT%{texmf}/tex/xelatex/xkeyval
+rm $RPM_BUILD_ROOT%{texmf}/doc/xetex/xetexref.pdf # a 24-byte text file
+install Documentation/XeTeX-notes.pdf $RPM_BUILD_ROOT%{texmf}/doc/xetex
 
 install -d $RPM_BUILD_ROOT%{texmf}/web2c
 install Work/texk/web2c/xetex.pool $RPM_BUILD_ROOT%{texmf}/web2c
+
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+install Samples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 cat >fmtutil.cnf <<EOF
 xetex	xetex	-	*xetex.ini
@@ -125,8 +130,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xe*tex
-%{texmf}/doc/generic/ifxetex
-%{texmf}/doc/xe*tex
+%doc %{texmf}/doc/generic/ifxetex
+%doc %{texmf}/doc/xe*tex
 %{texmf}/fonts/misc
 %{texmf}/scripts/xetex
 # tetex doesn't include texmfsrc: %{texmf}/source/xelatex
@@ -136,3 +141,4 @@ rm -rf $RPM_BUILD_ROOT
 %{texmf}/tex/xe*tex
 %{texmf}/web2c/xetex.pool
 %config(noreplace) %verify(not md5 mtime size) %{texmfvar}/web2c/xe*tex.fmt
+%{_examplesdir}/%{name}-%{version}
