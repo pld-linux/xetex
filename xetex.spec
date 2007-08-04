@@ -96,6 +96,9 @@ TEXMFSYSVAR=$RPM_BUILD_ROOT%{texmfvar} \
 TEXMFSYSCONFIG=$RPM_BUILD_ROOT%{texmf} \
 fmtutil-sys --cnffile fmtutil.cnf --all
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post
 texhash
 
@@ -123,9 +126,6 @@ fi
 
 %postun
 [ ! -x %{_bindir}/texhash ] || %{_bindir}/texhash
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
