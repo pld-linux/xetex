@@ -16,6 +16,8 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1:2.3
 BuildRequires:	tetex >= 1:3.0-7
+BuildRequires:	tetex-latex
+BuildRequires:	tetex-plain
 BuildRequires:	unzip
 Requires(post,preun,postun):	tetex
 Requires:	fontconfig
